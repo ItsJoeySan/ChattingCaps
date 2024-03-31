@@ -32,7 +32,6 @@ const useRoutes = () => {
     ],
     [pathname, conversationId]
   );
-  console.log("console from useRoute hook: ", routes);
   return routes;
 };
 
