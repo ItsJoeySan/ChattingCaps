@@ -24,7 +24,7 @@ export default async function RootLayout({
       <body className={inter.className}>
         <AuthContext>
           <ToasterContext />
-          <UserList items={users} />
+
           {children}
         </AuthContext>
       </body>

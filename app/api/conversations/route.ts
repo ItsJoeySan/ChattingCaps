@@ -13,7 +13,7 @@ export async function POST(request: Request) {
     }
 
     if (isGroup && (!members || members.length < 2 || !name)) {
-      return new NextResponse("Invalid dataK", { status: 401 });
+      return new NextResponse("Invalid data", { status: 400 });
     }
 
     if (isGroup) {
@@ -21,7 +21,7 @@ export async function POST(request: Request) {
         data: {
           name,
           isGroup,
-          user: {
+          users: {
             connect: [
               ...members.map((member: { value: string }) => ({
                 id: member.value,
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
           },
         },
         include: {
-          user: true,
+          users: true,
         },
       });
 
@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 
     const newConversation = await prisma.conversation.create({
       data: {
-        user: {
+        users: {
           connect: [
             {
               id: currentUser.id,
@@ -77,12 +77,11 @@ export async function POST(request: Request) {
         },
       },
       include: {
-        user: true,
+        users: true,
       },
     });
 
     return NextResponse.json(newConversation);
-    console.log("body: ", body);
   } catch (error: any) {
     return new NextResponse("Internal Error", { status: 500 });
   }
