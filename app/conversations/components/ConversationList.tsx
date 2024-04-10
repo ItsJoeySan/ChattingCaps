@@ -1,15 +1,15 @@
 "use client";
 
 import useConversation from "@/app/hooks/useConversation";
-import { Conversation } from "@prisma/client";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { MdOutlineGroupAdd } from "react-icons/md";
 import ConversationBox from "./ConversationBox";
+import { FullConversationType } from "@/app/types";
 
 interface ConversationListProps {
-  initialItems: Conversation[];
+  initialItems: FullConversationType[];
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({
@@ -39,7 +39,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
       )}
     >
       <div className="px-5">
-        <div className="flex flex-col justify-between mb-4 pt-4">
+        <div className="flex justify-between mb-4 pt-4">
           <div
             className="
             text-2xl
@@ -62,14 +62,14 @@ const ConversationList: React.FC<ConversationListProps> = ({
           >
             <MdOutlineGroupAdd size={20} />
           </div>
-          {items.map((item) => (
-            <ConversationBox
-              key={item.id}
-              data={item}
-              selected={conversationId === item.id}
-            />
-          ))}
         </div>
+        {items.map((item) => (
+          <ConversationBox
+            key={item.id}
+            data={item}
+            selected={conversationId === item.id}
+          />
+        ))}
       </div>
     </aside>
   );
