@@ -11,7 +11,6 @@ const useOtherUser = (
       }
 ) => {
   const session = useSession();
-  console.log("This is Session: ", session);
 
   const otherUser = useMemo(() => {
     const currentUserEmail = session?.data?.user?.email;
